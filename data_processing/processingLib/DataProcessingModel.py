@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 import pandas as pd
 
@@ -34,7 +36,7 @@ class CSVFile:
                            dtype=self.dtype,
                            names=self.names,
                            usecols=self.usecols,
-                           index_col=self.index_col)
+                           index_col=self.index_col, encoding='cp949')
         return {'header': np.array(data.columns.values.tolist()), 'data': data.to_numpy()}
 
 
@@ -47,7 +49,7 @@ class DataProcessingModel:
         for file in files:
             self.data[file.name] = file.load()
 
-    def print_data(self, name = None):
+    def print_data(self, name=None):
         if name is not None:
             print(self.data[name])
         else:
@@ -91,7 +93,7 @@ class DataProcessingModel:
             return
         try:
             pd.DataFrame(self.data[filename]['data'], columns=self.data[filename]['header']) \
-                .to_csv(path, encoding="UTF-16", mode="w", index=False)
+                .to_csv(path, encoding="cp949", mode="w", index=False)
         except KeyError:
             print(f"KeyError: {filename}")
 
@@ -133,3 +135,24 @@ class DataProcessingModel:
             newData = pd.merge(file1, file2, how='outer', on='key', right_index=False).drop(labels='key', axis=1)
 
         self.data[fileName] = {'header': np.array(newData.columns.values.tolist()), 'data': newData.to_numpy()}
+
+    def filter(self, name, f):
+        if name not in self.data.keys():
+            return
+        self.data[name]['data'] = f(self.data[name]['data'])
+
+    def fill_mean(self, filename: str, names=None, cols=None):
+        if cols is None:
+            cols = []
+        if names is None:
+            names = []
+
+        if filename not in self.data.keys():
+            return
+
+        if len(names) != 0:
+            cols = np.argwhere(np.isin(self.data[filename]['header'], np.array(names))).flatten()
+        for col in cols:
+            mean = np.nanmean(self.data[filename]['data'][:, col])
+            nan_list = np.isnan(self.data[filename]['data'][:, col].astype(float)).flatten()
+            self.data[filename]['data'][nan_list, col] = mean

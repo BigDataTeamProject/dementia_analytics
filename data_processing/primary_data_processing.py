@@ -1,3 +1,5 @@
+import math
+
 from data_processing.processingLib.DataProcessingModel import *
 from data_processing.processingLib.PathManager import *
 from data_processing.processingLib.DementiaDataSet import *
@@ -40,7 +42,7 @@ def toSleepDate(x):
     return x
 
 
-if __name__ == '__main__':
+def primary():
     # 가져올 header
     headers = ['EMAIL',
                'date',
@@ -117,3 +119,46 @@ if __name__ == '__main__':
     for t1, t2, path, on in combineData:
         dpm.combine(t1.value, t2.value, 't', on=on)
         dpm.save('t', f'{saveBasePath}{path}')
+
+
+def nan_filter(x):
+    return np.array([d for d in x if not math.isnan(d[2]) and not math.isnan(d[10])])
+
+# nan filter
+def secondary():
+    file = CSVFile('./dataset_01/training/source/train_dataset.csv', 't')
+    file2 = CSVFile('./dataset_01/validation/source/val_dataset.csv', 'v')
+    dpm = DataProcessingModel(file, file2)
+    dpm.filter('t', nan_filter)
+    dpm.save('t', './dataset_01/training/source/train_dataset_remove_nan.csv')
+
+    dpm.filter('v', nan_filter)
+    dpm.save('v', './dataset_01/validation/source/val_dataset_remove_nan.csv')
+
+def thirdly():
+    headers = ['activity_cal_total',
+               'activity_daily_movement',
+               'activity_inactivity_alerts',
+               'activity_rest',
+               'activity_score_meet_daily_targets',
+               'activity_score_stay_active',
+               'activity_steps',
+               'sleep_deep',
+               'sleep_duration',
+               'sleep_efficiency',
+               'sleep_hr_average',
+               'sleep_hr_lowest',
+               'sleep_onset_latency',
+               'sleep_rem']
+    file = CSVFile('./dataset_01/training/source/train_dataset.csv', 't')
+    file2 = CSVFile('./dataset_01/validation/source/val_dataset.csv', 'v')
+    dpm = DataProcessingModel(file, file2)
+    dpm.fill_mean('t', names=headers)
+    dpm.fill_mean('v', names=headers)
+    dpm.save('t', './dataset_01/training/source/train_dataset_fill_mean.csv')
+    dpm.save('v', './dataset_01/validation/source/val_dataset_fill_mean.csv')
+
+
+
+if __name__ == '__main__':
+    thirdly()
