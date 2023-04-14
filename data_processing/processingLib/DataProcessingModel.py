@@ -152,6 +152,7 @@ class DataProcessingModel:
 
         if len(names) != 0:
             cols = np.argwhere(np.isin(self.data[filename]['header'], np.array(names))).flatten()
+
         for col in cols:
             mean = np.nanmean(self.data[filename]['data'][:, col])
             nan_list = np.isnan(self.data[filename]['data'][:, col].astype(float)).flatten()
@@ -171,3 +172,19 @@ class DataProcessingModel:
 
         self.data[filename]['header'] = self.data[filename]['header'][cols]
         self.data[filename]['data'] = self.data[filename]['data'][:, cols]
+
+    def fill_mean_all(self, filename: str, excepts=[]):
+        if filename not in self.data.keys():
+            return
+
+        dataRange = np.arange(len(self.data[filename]['header']))
+        cols = np.argwhere(~np.isin(dataRange, [i if i >= 0 else (len(dataRange) + i) for i in excepts])).flatten()
+
+        for col in cols:
+            available = False
+            try:
+                mean = np.nanmean(self.data[filename]['data'][:, col])
+                nan_list = np.isnan(self.data[filename]['data'][:, col].astype(float)).flatten()
+                self.data[filename]['data'][nan_list, col] = mean
+            except:
+                print("type error: ", self.data[filename]['header'][col])

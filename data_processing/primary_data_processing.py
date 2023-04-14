@@ -228,6 +228,7 @@ def combineAll():
             dpm.replaceHeader(t.value, 'EMAIL', 'ID')
             dpm.del_cols(t.value, names=['activity_class_5min',
                                          'activity_met_1min',
+                                         'activity_day_end',
                                          'CONVERT(activity_class_5min USING utf8)',
                                          'CONVERT(activity_met_1min USING utf8)',
                                          'sleep_bedtime_end',
@@ -283,6 +284,17 @@ def combineAllDataAndLabel():
     dpm.save('v', './dataset_02/validation/val_dataset_with_label.csv')
 
 
+def combineAllDataAndLabelFillMean():
+    file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 't')
+    file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'v')
+    dpm = DataProcessingModel(file, file2)
+    dpm.fill_mean_all('t', excepts=[0, 1, -1])
+    dpm.save('t', './dataset_02/training/train_dataset_with_label_fill_mean.csv')
+
+    dpm.fill_mean_all('v', excepts=[0, 1, -1])
+    dpm.save('v', './dataset_02/validation/val_dataset_with_label_fill_mean.csv')
+
+
 def combineAllDataAndLabelRemoveNan():
     file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 't')
     file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'v')
@@ -297,5 +309,5 @@ def combineAllDataAndLabelRemoveNan():
 if __name__ == '__main__':
     combineAll()
     combineAllDataAndLabel()
+    combineAllDataAndLabelFillMean()
     combineAllDataAndLabelRemoveNan()
-
