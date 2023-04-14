@@ -156,3 +156,18 @@ class DataProcessingModel:
             mean = np.nanmean(self.data[filename]['data'][:, col])
             nan_list = np.isnan(self.data[filename]['data'][:, col].astype(float)).flatten()
             self.data[filename]['data'][nan_list, col] = mean
+
+    def del_cols(self, filename: str, names=None, cols=None):
+        if cols is None:
+            cols = []
+        if names is None:
+            names = []
+
+        if filename not in self.data.keys():
+            return
+
+        if len(names) != 0:
+            cols = ~np.isin(self.data[filename]['header'], np.array(names))
+
+        self.data[filename]['header'] = self.data[filename]['header'][cols]
+        self.data[filename]['data'] = self.data[filename]['data'][:, cols]
