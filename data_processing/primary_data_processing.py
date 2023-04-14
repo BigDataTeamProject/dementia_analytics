@@ -124,6 +124,7 @@ def primary():
 def nan_filter(x):
     return np.array([d for d in x if not math.isnan(d[2]) and not math.isnan(d[10])])
 
+
 # nan filter
 def secondary():
     file = CSVFile('./dataset_01/training/source/train_dataset.csv', 't')
@@ -134,6 +135,7 @@ def secondary():
 
     dpm.filter('v', nan_filter)
     dpm.save('v', './dataset_01/validation/source/val_dataset_remove_nan.csv')
+
 
 def thirdly():
     headers = ['activity_cal_total',
@@ -159,6 +161,44 @@ def thirdly():
     dpm.save('v', './dataset_01/validation/source/val_dataset_fill_mean.csv')
 
 
+def combineDataAndLabel():
+    ts = CSVFile('./dataset_01/training/source/train_dataset.csv', 'ts')
+    tl = CSVFile('./dataset_01/training/label/train_dataset_label.csv', 'tl')
+    vs = CSVFile('./dataset_01/validation/source/val_dataset.csv', 'vs')
+    vl = CSVFile('./dataset_01/validation/label/val_dataset_label.csv', 'vl')
+    dpm = DataProcessingModel(ts, tl, vs, vl)
+    dpm.combine('ts', 'tl', 't', on=['ID'])
+    dpm.combine('vs', 'vl', 'v', on=['ID'])
+    dpm.save('t', './dataset_01/training/train_dataset_with_label.csv')
+    dpm.save('v', './dataset_01/validation/val_dataset_with_label.csv')
+
+
+def combineRemoveNanDataAndLabel():
+    ts = CSVFile('./dataset_01/training/source/train_dataset_remove_nan.csv', 'ts')
+    tl = CSVFile('./dataset_01/training/label/train_dataset_label.csv', 'tl')
+    vs = CSVFile('./dataset_01/validation/source/val_dataset_remove_nan.csv', 'vs')
+    vl = CSVFile('./dataset_01/validation/label/val_dataset_label.csv', 'vl')
+    dpm = DataProcessingModel(ts, tl, vs, vl)
+    dpm.combine('ts', 'tl', 't', on=['ID'])
+    dpm.combine('vs', 'vl', 'v', on=['ID'])
+    dpm.save('t', './dataset_01/training/train_dataset_with_label_remove_nan.csv')
+    dpm.save('v', './dataset_01/validation/val_dataset_with_label_remove_nan.csv')
+
+def combineDataFillMeanAndLabel():
+    ts = CSVFile('./dataset_01/training/source/train_dataset_fill_mean.csv', 'ts')
+    tl = CSVFile('./dataset_01/training/label/train_dataset_label.csv', 'tl')
+    vs = CSVFile('./dataset_01/validation/source/val_dataset_fill_mean.csv', 'vl')
+    vl = CSVFile('./dataset_01/validation/label/val_dataset_label.csv', 'vs')
+    dpm = DataProcessingModel(ts, tl, vs, vl)
+    dpm.combine('ts', 'tl', 't', on=['ID'])
+    dpm.combine('vs', 'vl', 'v', on=['ID'])
+    dpm.move('t', 'DIAG_NM', 16)
+    dpm.move('v', 'DIAG_NM', 16)
+    dpm.save('t', './dataset_01/training/train_dataset_with_label_fill_mean.csv')
+    dpm.save('v', './dataset_01/validation/val_dataset_with_label_fill_mean.csv')
+
 
 if __name__ == '__main__':
-    thirdly()
+    combineDataAndLabel()
+    combineRemoveNanDataAndLabel()
+    combineDataFillMeanAndLabel()
