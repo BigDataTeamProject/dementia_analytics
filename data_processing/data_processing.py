@@ -316,6 +316,16 @@ def fillUserMean():
     dpm.save('f2', './dataset_03/validation/val_dataset_with_label_fill_user_mean.csv')
 
 
+def fillDIAG_NMMean():
+    file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 'f1')
+    file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'f2')
+    dpm = DataProcessingModel(file, file2)
+    dpm.fillWhereMean('f1', mean_where_col_name='DIAG_NM')
+    dpm.fillWhereMean('f2', mean_where_col_name='DIAG_NM')
+    dpm.save('f1', './dataset_03/training/train_dataset_with_label_fill_DIAG_NM_mean.csv')
+    dpm.save('f2', './dataset_03/validation/val_dataset_with_label_fill_DIAG_NM_mean.csv')
+
 if __name__ == '__main__':
     # combineAllDataAndLabelRemoveNan()
     fillUserMean()
+    fillDIAG_NMMean()
