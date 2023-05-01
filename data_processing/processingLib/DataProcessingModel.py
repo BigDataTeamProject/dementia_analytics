@@ -231,8 +231,51 @@ class DataProcessingModel:
                         except:
                             mean_value = whole_mean[col]
 
-                        nan_list = where_rows[np.isnan(self.data[filename]['data'][where_rows, col].astype(float)).flatten()]
+                        nan_list = where_rows[
+                            np.isnan(self.data[filename]['data'][where_rows, col].astype(float)).flatten()]
                         self.data[filename]['data'][nan_list, col] = mean_value
                     except Exception as error:
                         print(f"except {self.data[filename]['header'][col]} {error}")
                         noValidation.append(col)
+
+    def findMean(self, filename: str, mean_where_col=None, mean_where_col_name=None, withNan=False):
+        if filename not in self.data.keys():
+            return
+
+        if mean_where_col_name is not None:
+            mean_where_col = np.argwhere(
+                np.isin(self.data[filename]['header'], np.array(mean_where_col_name))).flatten()
+        if mean_where_col is None:
+            mean_where_col = [1]
+
+        where_value = np.array(list(set(self.data[filename]['data'][:, mean_where_col].flatten())))
+        noValidation = []
+        header = list(self.data[filename]['header'][mean_where_col])
+        data = [[where_value[i]] for i in range(len(where_value))]
+
+        for col in range(len(self.data[filename]['header'])):
+            for i, where in enumerate(where_value):
+                if col in noValidation:
+                    continue
+                try:
+                    where_rows = np.argwhere(self.data[filename]['data'][:, mean_where_col] == where)[:,
+                                 0].flatten()
+
+                    try:
+                        mean_value = np.nanmean(self.data[filename]['data'][where_rows, col])
+                    except:
+                        if withNan:
+                            mean_value = np.NaN
+                        else:
+                            noValidation.append(col)
+                    if col not in noValidation:
+                        data[i].append(mean_value)
+                except Exception as error:
+                    print(f"except {self.data[filename]['header'][col]} {error}")
+                    noValidation.append(col)
+                if i == len(where_value) - 1 and col not in noValidation:
+                    header.append(self.data[filename]['header'][col])
+
+
+        self.data[filename]['header'] = np.array(header)
+        self.data[filename]['data'] = np.array(data)

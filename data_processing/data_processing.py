@@ -325,7 +325,24 @@ def fillDIAG_NMMean():
     dpm.save('f1', './dataset_03/training/train_dataset_with_label_fill_DIAG_NM_mean.csv')
     dpm.save('f2', './dataset_03/validation/val_dataset_with_label_fill_DIAG_NM_mean.csv')
 
+def findMeanWithNan():
+    file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 'f1')
+    file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'f2')
+    dpm = DataProcessingModel(file, file2)
+    dpm.findMean('f1', mean_where_col_name='DIAG_NM', withNan=True)
+    dpm.findMean('f2', mean_where_col_name='DIAG_NM')
+    dpm.save('f1', './dataset_04/training/train_dataset_with_label_find_mean_with_nan.csv')
+    dpm.save('f2', './dataset_04/validation/val_dataset_with_label_find_mean_with_nan.csv')
+
+def findMean():
+    file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 'f1')
+    file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'f2')
+    dpm = DataProcessingModel(file, file2)
+    dpm.findMean('f1', mean_where_col_name='DIAG_NM', withNan=True)
+    dpm.findMean('f2', mean_where_col_name='DIAG_NM')
+    dpm.save('f1', './dataset_04/training/train_dataset_with_label_find_mean.csv')
+    dpm.save('f2', './dataset_04/validation/val_dataset_with_label_find_mean.csv')
+
 if __name__ == '__main__':
     # combineAllDataAndLabelRemoveNan()
-    fillUserMean()
-    fillDIAG_NMMean()
+    findMeanWithNan()
