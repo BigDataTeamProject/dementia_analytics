@@ -72,6 +72,13 @@ class DataProcessingModel:
         else:
             self.data[filename]['data'] = f(self.data[filename]['data'])
 
+    def copy(self, filename: str, filename2:str):
+        if filename not in self.data.keys():
+            return
+        self.data[filename2] = {}
+        self.data[filename2]['header'] = self.data[filename]['header'].copy()
+        self.data[filename2]['data'] = self.data[filename]['data'].copy()
+
     def extract(self, filename: str, names=None, cols=None):
         if cols is None:
             cols = []

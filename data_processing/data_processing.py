@@ -325,6 +325,7 @@ def fillDIAG_NMMean():
     dpm.save('f1', './dataset_03/training/train_dataset_with_label_fill_DIAG_NM_mean.csv')
     dpm.save('f2', './dataset_03/validation/val_dataset_with_label_fill_DIAG_NM_mean.csv')
 
+
 def findMeanWithNan():
     file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 'f1')
     file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'f2')
@@ -333,6 +334,7 @@ def findMeanWithNan():
     dpm.findMean('f2', mean_where_col_name='DIAG_NM', withNan=True)
     dpm.save('f1', './dataset_04/training/train_dataset_with_label_find_mean_with_nan.csv')
     dpm.save('f2', './dataset_04/validation/val_dataset_with_label_find_mean_with_nan.csv')
+
 
 def findMean():
     file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 'f1')
@@ -352,7 +354,7 @@ def combineAllData():
     file5 = CSVFile('./dataset_03/training/train_dataset_with_label_fill_DIAG_NM_mean.csv', 'f5')
     file6 = CSVFile('./dataset_03/validation/val_dataset_with_label_fill_DIAG_NM_mean.csv', 'f6')
     dpm = DataProcessingModel(file, file2, file3, file4, file5, file6)
-    dpm.add('f1','f2')
+    dpm.add('f1', 'f2')
     dpm.add('f3', 'f4')
     dpm.add('f5', 'f6')
     dpm.save('f1', './dataset_05/dataset_with_label_remove_nan.csv')
@@ -360,6 +362,45 @@ def combineAllData():
     dpm.save('f5', './dataset_05/dataset_with_label_fill_DIAG_NM_mean.csv')
 
 
+def allDataMean():
+    file = CSVFile('./dataset_05/dataset_with_label_remove_nan.csv', 'f1')
+    file2 = CSVFile('./dataset_05/dataset_with_label_fill_user_mean.csv', 'f2')
+    file3 = CSVFile('./dataset_05/dataset_with_label_fill_DIAG_NM_mean.csv', 'f3')
+    dpm = DataProcessingModel(file, file2, file3)
+
+    dpm.findMean('f1', mean_where_col_name='DIAG_NM')
+    dpm.findMean('f2', mean_where_col_name='DIAG_NM')
+    dpm.findMean('f3', mean_where_col_name='DIAG_NM')
+
+    dpm.save('f1', './dataset_06/dataset_mean_with_label_remove_nan.csv')
+    dpm.save('f2', './dataset_06/dataset_mean_with_label_fill_user_mean.csv')
+    dpm.save('f3', './dataset_06/dataset_mean_with_label_fill_DIAG_NM_mean.csv')
+
+def extractData():
+    availableHeaders=['activity_cal_active', 'activity_cal_total', 'activity_daily_movement', 'activity_steps',
+                      'sleep_awake','sleep_bedtime_end','sleep_bedtime_start','sleep_breath_average','sleep_deep','sleep_duration','sleep_hr_5min','sleep_hr_average','sleep_hr_lowest','sleep_rem', 'DIAG_NM']
+    mustCheckHeaders=['activity_day_end' ,'activity_day_start', 'activity_high', 'activity_inactive', 'active_low','activity_medium','activity_met_1min','activity_met_min_high','activity_met_min_inactive','activity_met_min_low','activity_met_min_medium','activity_rest','activity_total'
+                      'sleep_is_longest','sleep_temperature_delta','sleep_temperature_deviation','sleep_temperature_trend_deviation','sleep_total']
+    file = CSVFile('./dataset_06/dataset_mean_with_label_remove_nan.csv', 'f1')
+    file2 = CSVFile('./dataset_06/dataset_mean_with_label_fill_user_mean.csv','f3')
+    file3 = CSVFile('./dataset_06/dataset_mean_with_label_fill_DIAG_NM_mean.csv','f5')
+    dpm = DataProcessingModel(file, file2, file3)
+    dpm.copy('f1','f2')
+    dpm.copy('f3', 'f4')
+    dpm.copy('f5', 'f6')
+    dpm.extract('f1', names=availableHeaders)
+    dpm.extract('f2', names=availableHeaders+mustCheckHeaders)
+    dpm.extract('f3', names=availableHeaders+mustCheckHeaders)
+    dpm.extract('f4', names=availableHeaders+mustCheckHeaders)
+    dpm.extract('f5', names=availableHeaders+mustCheckHeaders)
+    dpm.extract('f6', names=availableHeaders+mustCheckHeaders)
+    dpm.save('f1', './dataset_07/dataset_mean_with_label_remove_nan_extract_available_headers.csv')
+    dpm.save('f2', './dataset_07/dataset_mean_with_label_remove_nan_extract_must_check_header.csv')
+    dpm.save('f3', './dataset_07/dataset_mean_with_label_fill_user_mean_extract_available_headers.csv')
+    dpm.save('f4', './dataset_07/dataset_mean_with_label_fill_user_mean_extract_must_check_header.csv')
+    dpm.save('f5', './dataset_07/dataset_mean_with_label_fill_DIAG_NM_mean_extract_available_headers.csv')
+    dpm.save('f6', './dataset_07/dataset_mean_with_label_fill_DIAG_NM_mean_extract_must_check_header.csv')
+
 
 if __name__ == '__main__':
-    combineAllData()
+    extractData()

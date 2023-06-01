@@ -126,7 +126,7 @@
 
 ### dataset_04
 
-#### NaN 값을 같은 ID의 데이터의 평균 또는 같은 라벨링의 평균으로 채운 데이터의 평균
+#### NaN 값을 같은 ID의 데이터의 평균 또는 같은 라벨링의 평균으로 채운 데이터의 평균 데이터
 
 **training**
 
@@ -142,9 +142,11 @@
 | -  | [val_dataset_with_label_find_mean](./dataset_04/validation/val_dataset_with_label_find_mean.cav)                   | 활동, 수면 검증 데이터의 평균 (평균 NaN값을 해당 ID의 평균으로 채움)      |
 | -  | [val_dataset_with_label_find_mean_with_nan](./dataset_04/validation/val_dataset_with_label_find_mean_with_nan.csv) | 활동, 수면 검증 데이터의 평균 (데이터의 평균 NaN값을 포함하지 않고 평균을 구함) |
 
+---
+
 ### dataset_05
 
-#### NaN 값을 같은 ID의 데이터의 평균 또는 같은 라벨링의 평균으로 채운 데이터 셋의
+#### NaN 값을 같은 ID의 (데이터의 평균 또는 같은 라벨링의 평균)으로 채운 데이터 셋의
 #### 트레이닝 데이터와 검증 데이터를 합친 데이터
 
 **dataset**
@@ -153,10 +155,51 @@
 |----|-----------------------------------------------------------------------------------------------|---------------------------------------|
 | -  | [dataset_with_label_fill_user_mean](./dataset_05/dataset_with_label_fill_user_mean.csv)       | 전체 데이터 (평균 NaN값을 해당 ID의 평균으로 채움)      |
 | -  | [dataset_with_label_fill_DIAG_NM_mean](./dataset_05/dataset_with_label_fill_DIAG_NM_mean.csv) | 전체 데이터 (데이터의 평균 NaN값을 포함하지 않고 평균을 구함) |
-| -  | [dataset_with_label_remove_nan](./dataset_05/dataset_with_label_remove_nan.csv)               | 전체 데이터 (NaN이 있는 데이터를 삭제한 데이터셋을 이ㅊㄴㅍ)  |
+| -  | [dataset_with_label_remove_nan](./dataset_05/dataset_with_label_remove_nan.csv)               | 전체 데이터 (NaN이 있는 데이터를 삭제한 데이터셋을 이용)    |
 
+---
 
 ### dataset_06
 
 #### NaN 값을 같은 ID의 (데이터의 평균 또는 같은 라벨링의 평균)으로 채운 데이터 셋의
-#### 전체 데이터의 라벨링 기준 평균
+#### 전체 데이터의 라벨링을 기준으로 한 평균 데이터
+
+| 타입 | 파일                                                                                                 | 설명                                        |
+|----|----------------------------------------------------------------------------------------------------|-------------------------------------------|
+| -  | [dataset_mean_with_label_fill_user_mean](./dataset_06/dataset_mean_with_label_fill_user_mean.csv)       | 전체 데이터의 평균 (평균 NaN값을 해당 ID의 평균으로 채움)      |
+| -  | [dataset_mean_with_label_fill_DIAG_NM_mean](./dataset_06/dataset_mean_with_label_fill_DIAG_NM_mean.csv) | 전체 데이터의 평균 (데이터의 평균 NaN값을 포함하지 않고 평균을 구함) |
+| -  | [dataset_mean_with_label_remove_nan](./dataset_06/dataset_mean_with_label_remove_nan.csv)               | 전체 데이터의 평균 (NaN이 있는 데이터를 삭제한 데이터셋을 이용)    |
+
+--- 
+
+### dataset_07
+
+#### dataset_05와 dataset_06의 데이터에서 애플 사용자 데이터와 대응 될 수 있는 데이터만 추출
+
+
+#### 사용 가능한 데이터
+> 활동 데이터  
+> 'activity_cal_active', 'activity_cal_total', 'activity_daily_movement', 'activity_steps'  
+> ---
+> 수면 데이터  
+> 'sleep_awake', 'sleep_bedtime_end', 'sleep_bedtime_start', 'sleep_breath_average', 'sleep_deep', 'sleep_duration', 'sleep_hr_5min', 'sleep_hr_average', 'sleep_hr_lowest', 'sleep_rem'
+
+#### 확인 후 사용 가능한 데이터
+> 활동 데이터  
+> 'activity_day_end', 'activity_day_start', 'activity_high', 'activity_inactive', 'active_low', 'activity_medium', 'activity_met_1min', 'activity_met_min_high', 'activity_met_min_inactive', 'activity_met_min_low', 'activity_met_min_medium', 'activity_rest', 'activity_total'  
+> ---
+> 수면 데이터  
+> 'sleep_is_longest', 'sleep_temperature_delta', 'sleep_temperature_deviation', 'sleep_temperature_trend_deviation', 'sleep_total'
+> 
+| 타입 | 파일                                                                                                                                                          | 설명                                        |
+|----|-------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| -  | [dataset_mean_with_label_remove_nan_extract_available_headers](./dataset_07/dataset_mean_with_label_remove_nan_extract_available_headers.csv)               | 전체 데이터의 평균 (평균 NaN값을 해당 ID의 평균으로 채움)      |
+| -  | [dataset_mean_with_label_remove_nan_extract_must_check_header](./dataset_07/dataset_mean_with_label_remove_nan_extract_must_check_header.csv)               | 전체 데이터의 평균 (데이터의 평균 NaN값을 포함하지 않고 평균을 구함) |
+| -  | [dataset_mean_with_label_fill_user_mean_extract_available_headers](./dataset_07/dataset_mean_with_label_fill_user_mean_extract_available_headers.csv)       | 전체 데이터의 평균 (데이터의 평균 NaN값을 포함하지 않고 평균을 구함) |
+| -  | [dataset_mean_with_label_fill_user_mean_extract_must_check_header](./dataset_07/dataset_mean_with_label_fill_user_mean_extract_must_check_header.csv)       | 전체 데이터의 평균 (NaN이 있는 데이터를 삭제한 데이터셋을 이용)    |
+| -  | [dataset_mean_with_label_fill_user_mean](./dataset_07/dataset_mean_with_label_fill_DIAG_NM_mean_extract_available_headers.csv)                              | 전체 데이터의 평균 (평균 NaN값을 해당 ID의 평균으로 채움)      |
+| -  | [dataset_mean_with_label_fill_DIAG_NM_mean_extract_must_check_header](./dataset_07/dataset_mean_with_label_fill_DIAG_NM_mean_extract_must_check_header.csv) | 전체 데이터의 평균 (NaN이 있는 데이터를 삭제한 데이터셋을 이용)    |
+
+---
+
+
