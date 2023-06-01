@@ -276,6 +276,16 @@ class DataProcessingModel:
                 if i == len(where_value) - 1 and col not in noValidation:
                     header.append(self.data[filename]['header'][col])
 
-
         self.data[filename]['header'] = np.array(header)
         self.data[filename]['data'] = np.array(data)
+
+    def add(self, filename: str, filename2: str):
+        if filename not in self.data.keys() or filename2 not in self.data.keys():
+            return
+
+        header = self.data[filename]['header']
+        header2 = self.data[filename2]['header']
+        data = self.data[filename2]['data'][np.array([np.where(header2 == h) for h in header]).flatten()]
+        data = np.append(self.data[filename]['data'], data, axis=0)
+        data = data[:][np.argsort(data[:, 0], axis=0)]
+        self.data[filename]['data'] = data

@@ -317,7 +317,7 @@ def fillUserMean():
 
 
 def fillDIAG_NMMean():
-    file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 'f1')
+    file = CSVFile('./dataset_023/training/train_dataset_with_label.csv', 'f1')
     file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'f2')
     dpm = DataProcessingModel(file, file2)
     dpm.fillWhereMean('f1', mean_where_col_name='DIAG_NM')
@@ -330,7 +330,7 @@ def findMeanWithNan():
     file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'f2')
     dpm = DataProcessingModel(file, file2)
     dpm.findMean('f1', mean_where_col_name='DIAG_NM', withNan=True)
-    dpm.findMean('f2', mean_where_col_name='DIAG_NM')
+    dpm.findMean('f2', mean_where_col_name='DIAG_NM', withNan=True)
     dpm.save('f1', './dataset_04/training/train_dataset_with_label_find_mean_with_nan.csv')
     dpm.save('f2', './dataset_04/validation/val_dataset_with_label_find_mean_with_nan.csv')
 
@@ -338,11 +338,28 @@ def findMean():
     file = CSVFile('./dataset_02/training/train_dataset_with_label.csv', 'f1')
     file2 = CSVFile('./dataset_02/validation/val_dataset_with_label.csv', 'f2')
     dpm = DataProcessingModel(file, file2)
-    dpm.findMean('f1', mean_where_col_name='DIAG_NM', withNan=True)
+    dpm.findMean('f1', mean_where_col_name='DIAG_NM')
     dpm.findMean('f2', mean_where_col_name='DIAG_NM')
     dpm.save('f1', './dataset_04/training/train_dataset_with_label_find_mean.csv')
     dpm.save('f2', './dataset_04/validation/val_dataset_with_label_find_mean.csv')
 
+
+def combineAllData():
+    file = CSVFile('./dataset_02/training/train_dataset_with_label_remove_nan.csv', 'f1')
+    file2 = CSVFile('./dataset_02/validation/val_dataset_with_label_remove_nan.csv', 'f2')
+    file3 = CSVFile('./dataset_03/training/train_dataset_with_label_fill_user_mean.csv', 'f3')
+    file4 = CSVFile('./dataset_03/validation/val_dataset_with_label_fill_user_mean.csv', 'f4')
+    file5 = CSVFile('./dataset_03/training/train_dataset_with_label_fill_DIAG_NM_mean.csv', 'f5')
+    file6 = CSVFile('./dataset_03/validation/val_dataset_with_label_fill_DIAG_NM_mean.csv', 'f6')
+    dpm = DataProcessingModel(file, file2, file3, file4, file5, file6)
+    dpm.add('f1','f2')
+    dpm.add('f3', 'f4')
+    dpm.add('f5', 'f6')
+    dpm.save('f1', './dataset_05/dataset_with_label_remove_nan.csv')
+    dpm.save('f3', './dataset_05/dataset_with_label_fill_user_mean.csv')
+    dpm.save('f5', './dataset_05/dataset_with_label_fill_DIAG_NM_mean.csv')
+
+
+
 if __name__ == '__main__':
-    # combineAllDataAndLabelRemoveNan()
-    findMeanWithNan()
+    combineAllData()
