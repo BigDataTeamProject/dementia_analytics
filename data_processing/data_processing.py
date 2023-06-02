@@ -409,21 +409,14 @@ def final_dataset():
 
     file = CSVFile('./dataset_03/training/train_dataset_with_label_fill_user_mean.csv', 'f1')
     file2 = CSVFile('./dataset_03/validation/val_dataset_with_label_fill_user_mean.csv', 'f2')
-    file3 = CSVFile('./dataset_03/training/train_dataset_with_label_fill_DIAG_NM_mean.csv', 'f3')
-    file4 = CSVFile('./dataset_03/validation/val_dataset_with_label_fill_DIAG_NM_mean.csv', 'f4')
-    dpm = DataProcessingModel(file, file2, file3, file4)
+    dpm = DataProcessingModel(file, file2)
     dpm.add('f1','f2')
-    dpm.add('f3','f4')
-    dpm.extract('f1', names=availableHeaders)
-    dpm.extract('f2', names=availableHeaders)
-    dpm.copy('f1', 'f5')
-    dpm.copy('f2','f6')
+    dpm.extract('f1', names=['ID']+availableHeaders)
+    dpm.copy('f1', 'f3')
+    dpm.extract('f3', names=availableHeaders)
     dpm.findMean('f5', mean_where_col_name='DIAG_NM')
-    dpm.findMean('f6', mean_where_col_name='DIAG_NM')
-    dpm.save('f1', './dataset_08/dataset_fill_user_mean.csv')
-    dpm.save('f2', './dataset_08/dataset_fill_DIAG_NM_mean.csv')
-    dpm.save('f5', './dataset_08/dataset_mean_fill_user_mean.csv')
-    dpm.save('f6', './dataset_08/dataset_mean_fill_DIAG_NM_mean.csv')
+    dpm.save('f1', './dataset_08/dataset.csv')
+    dpm.save('f3', './dataset_08/dataset_mean.csv')
 
 
 
