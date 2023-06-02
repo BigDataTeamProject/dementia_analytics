@@ -180,14 +180,14 @@
 #### 사용 가능한 데이터
 > 활동 데이터  
 > 'activity_cal_active', 'activity_cal_total', 'activity_daily_movement', 'activity_steps'  
-> ---
+>  
 > 수면 데이터  
 > 'sleep_awake', 'sleep_bedtime_end', 'sleep_bedtime_start', 'sleep_breath_average', 'sleep_deep', 'sleep_duration', 'sleep_hr_5min', 'sleep_hr_average', 'sleep_hr_lowest', 'sleep_rem'
 
 #### 확인 후 사용 가능한 데이터
 > 활동 데이터  
 > 'activity_day_end', 'activity_day_start', 'activity_high', 'activity_inactive', 'active_low', 'activity_medium', 'activity_met_1min', 'activity_met_min_high', 'activity_met_min_inactive', 'activity_met_min_low', 'activity_met_min_medium', 'activity_rest', 'activity_total'  
-> ---
+>  
 > 수면 데이터  
 > 'sleep_is_longest', 'sleep_temperature_delta', 'sleep_temperature_deviation', 'sleep_temperature_trend_deviation', 'sleep_total'
 > 
@@ -202,4 +202,22 @@
 
 ---
 
+### dataset_08
 
+#### 최종적으로 사용 될 데이터셋
+#### NaN값을 해당 ID의 평균으로 채운 데이터 셋에서 사용 가능한 데이터를 추출한 데이터셋과 해당 데이터셋의 라벨을 기준으로 한 평균 데이터
+
+#### 사용 가능한 데이터
+> 활동 데이터  
+> 'activity_cal_active', 'activity_cal_total', 'activity_daily_movement', 'activity_steps' 
+> 
+> 수면 데이터  
+> 'sleep_awake', 'sleep_bedtime_end', 'sleep_bedtime_start', 'sleep_breath_average', 'sleep_deep', 'sleep_duration', 'sleep_hr_5min', 'sleep_hr_average', 'sleep_hr_lowest', 'sleep_rem'
+
+
+| 타입 | 파일                                            | 설명                               |
+|----|-----------------------------------------------|----------------------------------|
+| -  | [dataset](./dataset_08/dataset.csv)           | 최종적으로 사용 할 데이터셋                  |
+| -  | [dataset_mean](./dataset_08/dataset_mean.csv) | 최종적으로 사용 할 데이터셋의 평균 (DIAG_NM 기준) |
+
+---

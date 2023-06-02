@@ -390,9 +390,9 @@ def extractData():
     dpm.copy('f5', 'f6')
     dpm.extract('f1', names=availableHeaders)
     dpm.extract('f2', names=availableHeaders+mustCheckHeaders)
-    dpm.extract('f3', names=availableHeaders+mustCheckHeaders)
+    dpm.extract('f3', names=availableHeaders)
     dpm.extract('f4', names=availableHeaders+mustCheckHeaders)
-    dpm.extract('f5', names=availableHeaders+mustCheckHeaders)
+    dpm.extract('f5', names=availableHeaders)
     dpm.extract('f6', names=availableHeaders+mustCheckHeaders)
     dpm.save('f1', './dataset_07/dataset_mean_with_label_remove_nan_extract_available_headers.csv')
     dpm.save('f2', './dataset_07/dataset_mean_with_label_remove_nan_extract_must_check_header.csv')
@@ -401,6 +401,31 @@ def extractData():
     dpm.save('f5', './dataset_07/dataset_mean_with_label_fill_DIAG_NM_mean_extract_available_headers.csv')
     dpm.save('f6', './dataset_07/dataset_mean_with_label_fill_DIAG_NM_mean_extract_must_check_header.csv')
 
+def final_dataset():
+    availableHeaders = ['activity_cal_active', 'activity_cal_total', 'activity_daily_movement', 'activity_steps',
+                        'sleep_awake', 'sleep_bedtime_end', 'sleep_bedtime_start', 'sleep_breath_average', 'sleep_deep',
+                        'sleep_duration', 'sleep_hr_5min', 'sleep_hr_average', 'sleep_hr_lowest', 'sleep_rem',
+                        'DIAG_NM']
+
+    file = CSVFile('./dataset_03/training/train_dataset_with_label_fill_user_mean.csv', 'f1')
+    file2 = CSVFile('./dataset_03/validation/val_dataset_with_label_fill_user_mean.csv', 'f2')
+    file3 = CSVFile('./dataset_03/training/train_dataset_with_label_fill_DIAG_NM_mean.csv', 'f3')
+    file4 = CSVFile('./dataset_03/validation/val_dataset_with_label_fill_DIAG_NM_mean.csv', 'f4')
+    dpm = DataProcessingModel(file, file2, file3, file4)
+    dpm.add('f1','f2')
+    dpm.add('f3','f4')
+    dpm.extract('f1', names=availableHeaders)
+    dpm.extract('f2', names=availableHeaders)
+    dpm.copy('f1', 'f5')
+    dpm.copy('f2','f6')
+    dpm.findMean('f5', mean_where_col_name='DIAG_NM')
+    dpm.findMean('f6', mean_where_col_name='DIAG_NM')
+    dpm.save('f1', './dataset_08/dataset_fill_user_mean.csv')
+    dpm.save('f2', './dataset_08/dataset_fill_DIAG_NM_mean.csv')
+    dpm.save('f5', './dataset_08/dataset_mean_fill_user_mean.csv')
+    dpm.save('f6', './dataset_08/dataset_mean_fill_DIAG_NM_mean.csv')
+
+
 
 if __name__ == '__main__':
-    extractData()
+    final_dataset()
