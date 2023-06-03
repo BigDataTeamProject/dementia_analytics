@@ -296,3 +296,10 @@ class DataProcessingModel:
         data = np.append(self.data[filename]['data'], data, axis=0)
         data = data[:][np.argsort(data[:, 0], axis=0)]
         self.data[filename]['data'] = data
+
+    def sequence(self, filename, headers):
+        if filename not in self.data.keys():
+            return
+        seq = np.array([np.argwhere(self.data[filename]['header'] == header) for header in headers]).flatten()
+        self.data[filename]['header'] = self.data[filename]['header'][seq]
+        self.data[filename]['data'] = self.data[filename]['data'][:,seq]
