@@ -1,5 +1,5 @@
 # 학습시킨 모델
-## Oversampling 등 데이터 전처리 전
+# Oversampling 등 데이터 전처리 전
 * KNN (Classification)
   + train accuracy : 0.75
   + test accuracy  : 0.58
@@ -15,17 +15,34 @@
   + train accuracy : 0.59
   + test accuracy  : 0.79
 
-## Oversampling 등 데이터 전처리 후
+# 데이터 불균형 문제 해결 시도 + 사용 가능한 데이터만 사용
+## 1. train_test_split 시 label 별로 균등하게 분배되도록 시도
 LightGBM_with_DataPreprocessing.ipynb 파일을 확인해 보면 데이터 전처리 과정이 자세하게 나와있다.
-1. accuracy가 낮게 나오고, test data에서 오히려 accuracy가 높게 나오는 경향이 있는 것이 이상해서 test 데이터의 분포와 test data로 prediction한 결과의 분포를 확인해 보니, 데이터가 균일하지 않아 모델이 모든 데이터에 대해 하나의 라벨로만 분류하는 모습을 확인할 수 있었다.
-2. 따라서 Train-Test 데이터셋을 합쳐 전체 데이터셋의 분포를 확인해보았다. 전체 데이터에서도 데이터 불균형이 있는 것을 확인하여 sklearn의 MinMaxScaler를 사용해 train 데이터에 맞춰진 scaler를 만들고 이에 전체 원천 데이터를 scaling하였다.
-3. 그리고 SMOTE를 사용하여 oversampling을 하였다.
-4. 그 다음으로 train_test_split을 사용할 때 stratify를 사용하여 라벨 별로 균등하게 데이터를 분리하였다.
-5. 이와 같이 전처리가 완료된 데이터를 사용하여 LightGBM으로 train과 test를 해본 결과 accuracy가 많이 개선되었다.
+* 사용자로부터 얻을 수 없는 feature를 제거하고 모델 학습을 진행하였다.
+* 기존의 방법에서 LightGBM의 accuracy가 낮게 나오고, test data에서 오히려 accuracy가 높게 나오는 경향이 있는 것이 이상해서 test 데이터의 분포와 test data로 prediction한 결과의 분포를 확인해 보니,      
+  ![image](https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/61df643e-0385-4048-af26-786b0e1c67c7)     
+  데이터가 균일하지 않아 모델이 모든 데이터에 대해 하나의 라벨로만 분류하는 모습을 확인할 수 있었다.
+* 따라서 Train-Test 데이터셋을 합친 후 sklearn의 MinMaxScaler를 사용해 train 데이터에 맞춰진 scaler를 만들고 이에 전체 원천 데이터를 scaling하였다.
+* 그리고 train_test_split 을 사용할 stratify를 사용하여 라벨 별로 균등하게 데이터를 분리하였다.
+* 이와 같이 전처리가 완료된 데이터를 사용하여 LightGBM으로 train과 test를 해본 결과 accuracy가 많이 개선되었고, test prediction도 다양하게 나타났다.     
+![image](https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/fe1793ce-699e-4a0f-8c8e-6d9c7e8aa89b)     
 
-* Scaling + Train-Test를 각 라벨 별로 균등하게 분배 -> LightGBM 사용
-  + train accuracy : 0.93
-  + test accuracy  : 0.83
-* Scaling + Oversampling + 라벨 별로 균등하게 분배 -> LightGBM 사용
-  + train accuracy : 0.95
-  + test accuracy  : 0.91
+## 2. SMOTE를 사용한 오버샘플링
+train과 test 데이터를 균등하게 분배한다고 해도, 전체 데이터셋에서도 데이터 불균형이 있기 때문에 오버샘플링을 train data에 적용해보았다.     
+![image](https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/0a7f22e4-8b04-4650-8a47-6616b063851d)     
+하지만 그 결과 성능이 더 좋아지지는 않았다.
+
+## 3. 클래스 가중치
+오버샘플링 대신 데이터 개수가 적은 클래스에 더 높은 가중치를 주어 학습해보고자 하였다.     
+![image](https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/1a6c5a97-e6a9-4a15-9dd9-6fb526b76033)        
+클래스 가중치가 데이터 개수에 반비례하도록  하여 적용하였지만 이 또한 성능을 더 높이지 못했다.
+
+## 각 시도에 대한 테스트 결과
+
+|  | Scaling  | Scaling + train test 균등 | Scaling + train test 균등 + 오버샘플링 | Scaling + train test 균등 + 클래스 가중치 설정 |
+| --- | --- | --- | --- | --- |
+| test prediction | 하나의 라벨로만 predict | 골고루 predict | 골고루 predict | 골고루 predict |
+| accuracy | 0.7860560492139439 | 0.7866549604916594 | 0.7704126426690079 | 0.7673397717295873 |
+| precision | 0.26201868307131465 | 0.8064685479616706 | 0.7282679357125437 | 0.7399033940895526 |
+| recall | 0.3333333333333333 | 0.7340414455421468 | 0.7679857247318678 | 0.7820258345363534 |
+| f1 score | 0.2934047710167113 | 0.7636371852563455 | 0.7460160196972794 | 0.7581407749395169 |
