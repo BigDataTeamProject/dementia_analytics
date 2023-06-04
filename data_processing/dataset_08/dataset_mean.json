@@ -1,0 +1,41 @@
+{
+  "CN": {
+    "sleep_breath_average": 16.733783697504197,
+    "sleep_hr_average": 60.61229524424158,
+    "sleep_hr_lowest": 55.06802441648845,
+    "sleep_deep": 5291.957083947756,
+    "sleep_rem": 3653.123870908104,
+    "activity_cal_total": 2484.323611554248,
+    "sleep_awake": 5305.218680855735,
+    "activity_steps": 10533.49423526137,
+    "activity_total": 336.308147761495,
+    "sleep_duration": 28628.825633230696,
+    "activity_daily_movement": 8715.73405185674
+  },
+    "DEM": {
+    "sleep_breath_average": 16.666301632494502,
+    "sleep_hr_average": 58.626567469554566,
+    "sleep_hr_lowest": 52.70805807628563,
+    "sleep_deep": 4199.597653391989,
+    "sleep_rem": 4063.4841908410144,
+    "activity_cal_total": 2451.662193694954,
+    "sleep_awake": 6823.296828641808,
+    "activity_steps": 9194.240632852086,
+    "activity_total": 271.01828013284427,
+    "sleep_duration": 33582.08426510319,
+    "activity_daily_movement": 7926.098608716721
+  },
+    "MCI": {
+    "sleep_breath_average":  16.91464923699971,
+    "sleep_hr_average": 60.344267505245654,
+    "sleep_hr_lowest": 55.058551633262546,
+    "sleep_deep": 4896.060853768711,
+    "sleep_rem": 3542.9260629883843,
+    "activity_cal_total": 2539.814475412748,
+    "sleep_awake": 5725.049002360756,
+    "activity_steps": 11080.470564515084,
+    "activity_total": 364.0630293598754,
+    "sleep_duration": 29023.269868470536,
+    "activity_daily_movement": 8996.601904472282
+  }
+}
