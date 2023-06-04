@@ -48,7 +48,7 @@ train과 test 데이터를 균등하게 분배한다고 해도, 전체 데이터
 | f1 score | 0.2934047710167113 | 0.7636371852563455 | 0.7460160196972794 | 0.7581407749395169 |
 
 # 최종 모델 선정
-: Scaling과 Train Test를 균등하게 나눈 후 LightGBM, XGBoost, RandomForest, NaiveBayes 등 시도
+: Scaling과 Train Test를 균등하게 나눈 후 LightGBM, XGBoost, RandomForest, NaiveBayes 등 시도 (Final_Data_Modeling.ipynb)
 
 |  | LightGBM | XGBoost | RandomForest | KNN | Naive Bayes | Extra Trees Classifier |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -60,7 +60,7 @@ train과 test 데이터를 균등하게 분배한다고 해도, 전체 데이터
 -> 결과, XGBoost가 제일 좋게 나오는 것을 확인하였다.
 
 # XGBoost 하이퍼파라미터 튜닝
-위에서 성능이 가장 좋았던 XGBoost에 하이퍼파라미터 튜닝을 시도해 보았다.
+위에서 성능이 가장 좋았던 XGBoost에 하이퍼파라미터 튜닝을 시도해 보았다. (Final_Data_Modeling.ipynb)
 ```
 best f1_macro :  0.7852
 best param :  {'colsample_bytree': 0.9, 'gamma': 0, 'learning_rate': 0.15, 'max_depth': 15, 'n_estimators': 500}
@@ -71,3 +71,5 @@ Precision: 0.8416233659789031
 Recall: 0.7727108795832498
 F1 Score: 0.8020239575298093
 ```
+
+이 결과대로 튜닝된 XGBoost를 최종 모델로 사용하기로 결정하고, Final_Model.ipynb에서 이를 프로그래밍했다.
