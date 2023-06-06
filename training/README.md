@@ -1,3 +1,10 @@
+# 기본적인 전처리 방법
+Classification의 경우, 라벨 인코더를 사용하여 `CN : 0, Dem : 1, MCI : 2` 로 바꾸어 사용하였다.
+Regression의 경우, CN은 0, MCI는 0.5, Dem은 1 와 같이 치매율를 나타내어 사용하였다.
+<img width="326" alt="image" src="https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/3f6143a6-8333-4436-a06e-b3453633c13b">
+
+<img width="371" alt="image" src="https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/74b861a4-9408-4820-9b32-a56235505c2e">
+
 # 학습시킨 모델
 # Oversampling 등 데이터 전처리 전
 * KNN (Classification)
