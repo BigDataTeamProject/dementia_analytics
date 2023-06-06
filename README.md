@@ -83,35 +83,35 @@
 
 | 홈                                          | 차트                                          | 설정                                             |
 |--------------------------------------------|---------------------------------------------|------------------------------------------------|
-| <img src="./images/Home.png" width="400"/> | <img src="./images/Chart.png" width="400"/> | <img src="./images/Settings.png" width="400"/> |
+| <img src="./images/Home.png" width=360/> | <img src="./images/Chart.png" width=360/> | <img src="./images/Settings.png" width=360/> |
 
 ### 사용자 건강 데이터 요청
 
 | 아이폰의 건강 데이터 접근                               | 
 |----------------------------------------------|
-| <img src="./images/health.png" width="400"/> |
+| <img src="./images/health.png" width=360/> |
 
 ### 사용자 건강 데이터 관리
 
 | 건강 데이터 확인 및 관리                                   | 애플리케이션 내 데이터 확인 및 관리                              | 애플리케이션 내 데이터 추가                                   |
 |--------------------------------------------------|---------------------------------------------------|---------------------------------------------------|
-| <img src="./images/healthData.png" width="400"/> | <img src="./images/managedData.png" width="400"/> | <img src="./images/managedData.png" width="400"/> |
+| <img src="./images/healthData.png" width=360 /> | <img src="./images/managedData.png" width=360/> | <img src="./images/managedData.png" width=360/> |
 
 
 ### 분석 및 시각화
 | 사용자 데이터 분석 (정상인)                         | 사용자 데이터 분석 (치매 환자)                        | 차트                                              |
 |------------------------------------------|-------------------------------------------|-------------------------------------------------|
-| <img src="./images/cn.png" width="400"/> | <img src="./images/dem.png" width="400"/> | <img src="./images/stepChart.png" width="400"/> |
+| <img src="./images/cn.png" width=360/> | <img src="./images/dem.png" width=360/> | <img src="./images/stepChart.png" width=360/> |
 
 
 ### 설정
 | 사용자 정보 표시                                      | 사용자 정보 설정                                     |
 |------------------------------------------------|-----------------------------------------------|
-| <img src="./images/Settings.png" width="400"/> | <img src="./images/addUser.png" width="400"/> |
+| <img src="./images/Settings.png" width=360/> | <img src="./images/addUser.png" width=360/> |
 
 ### 프로필 및 권한 예외 처리
 
 | 프로필 정보 업데이트 요청                                            | 권한 요청                                            |
 |-----------------------------------------------------------|--------------------------------------------------|
-| <img src="./images/needToUpdateProfile.png" width="400"/> | <img src="./images/needToAuth.png" width="400"/> |
+| <img src="./images/needToUpdateProfile.png" width=360/> | <img src="./images/needToAuth.png" width=360/> |
 
