@@ -1,7 +1,7 @@
 # 기본적인 전처리 방법
 Classification의 경우, 라벨 인코더를 사용하여 `CN : 0, Dem : 1, MCI : 2` 로 바꾸어 사용하였다.
-Regression의 경우, CN은 0, MCI는 0.5, Dem은 1 와 같이 치매율를 나타내어 사용하였다.
-<img width="326" alt="image" src="https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/3f6143a6-8333-4436-a06e-b3453633c13b">
+Regression의 경우, CN은 0, MCI는 0.5, Dem은 1 와 같이 치매율를 나타내어 사용하였다.    
+<img width="326" alt="image" src="https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/3f6143a6-8333-4436-a06e-b3453633c13b">    
 
 <img width="371" alt="image" src="https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/74b861a4-9408-4820-9b32-a56235505c2e">
 
@@ -79,4 +79,72 @@ Recall: 0.7727108795832498
 F1 Score: 0.8020239575298093
 ```
 
-이 결과대로 튜닝된 XGBoost를 최종 모델로 사용하기로 결정하고, Final_Model.ipynb에서 이를 프로그래밍했다.
+* 이 결과대로 튜닝된 XGBoost를 최종 모델로 사용하기로 결정하고, Final_Model.ipynb에서 이를 프로그래밍했다.
+* 이 모델을 테스트해보는 코드는 load_and_predict_FinelModel.ipynb에도 있다.
+```
+0 번째:
+예측: [0]
+실제: [0]
+
+100 번째:
+예측: [0]
+실제: [2]
+
+200 번째:
+예측: [2]
+실제: [2]
+
+300 번째:
+예측: [0]
+실제: [0]
+
+400 번째:
+예측: [0]
+실제: [0]
+
+500 번째:
+예측: [0]
+실제: [0]
+
+600 번째:
+예측: [2]
+실제: [2]
+
+700 번째:
+예측: [0]
+실제: [0]
+
+800 번째:
+예측: [2]
+실제: [2]
+
+900 번째:
+예측: [0]
+실제: [0]
+
+1000 번째:
+예측: [0]
+실제: [0]
+
+1100 번째:
+예측: [0]
+실제: [0]
+
+1200 번째:
+예측: [2]
+실제: [2]
+
+1300 번째:
+예측: [1]
+실제: [1]
+
+1400 번째:
+예측: [0]
+실제: [0]
+
+...
+```
+
+# 학습된 모델 저장 및 복원
+* .pkl 로 모델과 scaler 저장
+* .pkl 로 저장된 모델과 scaler 복원해 사용하는 코드는 load_and_predict_FinalModel.ipynb 에 있다.
