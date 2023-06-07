@@ -164,18 +164,24 @@ MinMaxScaler만 사용한 경우와 SMOTE까지 적용한 경우 성능 차이�
 실제: [0]
 ```
 ```
-
-print("Precision:", precision)
-
-# 재현율 계산
-recall = recall_score(test_output, test_pred, average='macro')
-print("Recall:", recall)
-
-# F1 스코어 계산
-f1 = f1_score(test_output, test_pred, average='macro')
-print("F1 Score:", f1)
 Accuracy: 0.7726075504828798
 Precision: 0.7308847434425226
 Recall: 0.7808662772477639
 F1 Score: 0.7526889999748554
 ```
+
+
+# 참고한 자료:
+[https://tensorflow.blog/파이썬-머신러닝/2-3-2-k-최근접-이웃/](https://tensorflow.blog/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/2-3-2-k-%EC%B5%9C%EA%B7%BC%EC%A0%91-%EC%9D%B4%EC%9B%83/)
+
+[https://zzinnam.tistory.com/entry/하이퍼파라미터-Serching-with-파이썬-GridSearchCV-함수](https://zzinnam.tistory.com/entry/%ED%95%98%EC%9D%B4%ED%8D%BC%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0-Serching-with-%ED%8C%8C%EC%9D%B4%EC%8D%AC-GridSearchCV-%ED%95%A8%EC%88%98) 
+
+[https://skillmemory.tistory.com/entry/머신러닝-분류-사이킷런을-활용한-나이브-베이즈-분류](https://skillmemory.tistory.com/entry/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EB%B6%84%EB%A5%98-%EC%82%AC%EC%9D%B4%ED%82%B7%EB%9F%B0%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EB%82%98%EC%9D%B4%EB%B8%8C-%EB%B2%A0%EC%9D%B4%EC%A6%88-%EB%B6%84%EB%A5%98)
+
+https://injo.tistory.com/30
+
+[https://john-analyst.medium.com/smote로-데이터-불균형-해결하기-5ab674ef0b32](https://john-analyst.medium.com/smote%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%88%EA%B7%A0%ED%98%95-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0-5ab674ef0b32)
+
+[https://romg2.github.io/mlguide/03_머신러닝-완벽가이드-04.-분류-XGBoost/](https://romg2.github.io/mlguide/03_%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%99%84%EB%B2%BD%EA%B0%80%EC%9D%B4%EB%93%9C-04.-%EB%B6%84%EB%A5%98-XGBoost/)
+
+https://m.blog.naver.com/wideeyed/221330321950
