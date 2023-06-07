@@ -163,4 +163,19 @@ MinMaxScaler만 사용한 경우와 SMOTE까지 적용한 경우 성능 차이�
 예측: [0]
 실제: [0]
 ```
+```
 
+print("Precision:", precision)
+
+# 재현율 계산
+recall = recall_score(test_output, test_pred, average='macro')
+print("Recall:", recall)
+
+# F1 스코어 계산
+f1 = f1_score(test_output, test_pred, average='macro')
+print("F1 Score:", f1)
+Accuracy: 0.7726075504828798
+Precision: 0.7308847434425226
+Recall: 0.7808662772477639
+F1 Score: 0.7526889999748554
+```
