@@ -63,8 +63,29 @@
 
 ## [3. 모델 학습](./training/README.md)
 
->
+> 프로젝트에서 사용할 모델 준비
 
+### before_oversampling 폴더
+  - 다양한 모델들로 학습을 진행시켜본 코드 및 결과
+### 그 외 
+- 아이폰 사용자가 얻을 수 있는 feature로만 학습 
+  +  (그 중 feature importance가 떨어져서 제외시켜야 성능이 더 높게 나오는 feature는 제외)
+- 가장 적절한 전처리 방법과 모델을 선택
+
+#### 전처리 방법 결정 (LightGBM으로 각각 방법에 대한 validation data의 성능 지표 비교)
+1. Min Max Scaler 적용해 결과 확인
+2. Min Max Scaler 적용 후 SMOTE를 사용해 클래스 불균형 문제 개선
+3. Min Max Scaler 적용 후 클래스 가중치를 사용해 클래스 불균형 문제 개선
+
+=> 우리가 만드는 서비스는 치매 환자와 비슷한 수치를 가지는 사용자들에게 경고를 주는 서비스이기 때문에 Recall 을 중요시해 2번 방법 채택
+
+#### 모델 비교 
+- SMOTE를 사용해 오버샘플링된 데이터가 validation 이나 test data로 새지 않도록 해야 하기 때문에, before_oversampling 에서 좋은 성능을 보였던 앙상블 기법 중 validation set을 직접 지정할 수 있는 모델을 찾아 사용해 보고 비교
+ 
+1. LightGBM
+2. XGBoost
+
+=> LightGBM 채택
 
 ---
 
