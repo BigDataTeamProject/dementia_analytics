@@ -68,7 +68,7 @@
 
 ---
 
-## [4. 서버]()
+## [4. 서버](https://github.com/BigDataTeamProject/dementia_analytics-server/blob/main/README.md)
 
 > 요청에 따라 예측값과 평균값을 앱에 제공
 
