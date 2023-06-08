@@ -67,6 +67,7 @@
 
 ### training/before_oversampling/
   - 다양한 모델들로 학습을 진행시켜본 코드 및 결과
+  - 앙상블 학습 모델들의 성능이 뛰어난 편임을 확인하였다
 ### training/ 
 - 아이폰 사용자가 얻을 수 있는 feature로만 학습 
   +  (그 중 feature importance가 떨어져서 제외시켜야 성능이 더 높게 나오는 feature는 제외)
