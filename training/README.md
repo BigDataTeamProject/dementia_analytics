@@ -169,7 +169,10 @@ Precision: 0.7308847434425226
 Recall: 0.7808662772477639
 F1 Score: 0.7526889999748554
 ```
+<img width="367" alt="image" src="https://github.com/BigDataTeamProject/dementia_analytics/assets/90085690/67b75ecf-7f0c-4bb7-a489-ea7963d36163">
 
+    
+-> 정상과 경도인지장애를 혼동한 경우가 대부분임을 확인할 수 있었다.
 
 # 참고한 자료:
 [https://tensorflow.blog/파이썬-머신러닝/2-3-2-k-최근접-이웃/](https://tensorflow.blog/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/2-3-2-k-%EC%B5%9C%EA%B7%BC%EC%A0%91-%EC%9D%B4%EC%9B%83/)
